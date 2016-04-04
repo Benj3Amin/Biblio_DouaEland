@@ -11,8 +11,29 @@ public class Employe extends Utilisateur
    /**
     * @roseuid 5241490A002F
     */
-   public Employe() 
-   {
+   
+		   //constructeurs
+		   public Employe() {}
+		
+		   public Employe(String codeMatricule, EnumCategorieEmploye categorieEmploye) {
+			super();
+			this.codeMatricule = codeMatricule;
+			this.categorieEmploye = categorieEmploye;
+		   }
+		   //getters and setters
+
+		public String getCodeMatricule() {
+			return codeMatricule;
+		}
+
+		
+
+		public EnumCategorieEmploye getCategorieEmploye() {
+			return categorieEmploye;
+		}
+
+		
+   
     
-   }
+   
 }

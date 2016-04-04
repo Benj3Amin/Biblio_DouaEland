@@ -2,28 +2,66 @@
 
 package metier;
 
+import java.util.ArrayList;
+// classe user
 
 public class Utilisateur extends Personne 
 {
-   private Integer idUtilisateur;
+   private int idUtilisateur;
    private String pwd;
    private String pseudonyme;
-   private EmpruntEnCours empruntEnCours[];
+   private ArrayList <EmpruntEnCours> empruntEnCours =new ArrayList<EmpruntEnCours>();
    
    /**
     * @roseuid 5241490A01F4
     */
-   public Utilisateur() 
-   {
-    
-   }
-   
-   /**
+		   public Utilisateur() { }
+		  
+		   public Utilisateur(Integer idUtilisateur, String pwd, String pseudonyme) {
+			
+				this.idUtilisateur = idUtilisateur;
+				this.pwd = pwd;
+		     	this.pseudonyme = pseudonyme;
+				
+		   }
+
+
+
+		   	//getters and setters
+			public Integer getIdUtilisateur() {
+						return idUtilisateur;
+					}
+			
+					public void setIdUtilisateur(Integer idUtilisateur) {
+						this.idUtilisateur = idUtilisateur;
+					}
+			
+					public String getPwd() {
+						return pwd;
+					}
+			
+					public void setPwd(String pwd) {
+						this.pwd = pwd;
+					}
+			
+					public String getPseudonyme() {
+						return pseudonyme;
+					}
+			
+					public void setPseudonyme(String pseudonyme) {
+						this.pseudonyme = pseudonyme;
+					}
+			
+					
+
+/**
     * @param ep
     * @roseuid 4CA4A34E02FD
     */
    public void addEmpruntEnCours(EmpruntEnCours ep) 
    {
+	   this.empruntEnCours.add(ep);
+	   ep.getExemplaire().setStatus(EnumStatusExemplaire.PRETE);
     
    }
    
@@ -31,17 +69,20 @@ public class Utilisateur extends Personne
     * @return biblio.metier.EmpruntEnCours[ ]
     * @roseuid 4CA4A2C2006D
     */
-   public EmpruntEnCours[ ] getEmpruntEnCours() 
+   public ArrayList<EmpruntEnCours>  getEmpruntEnCours() 
    {
-    return null;
+    return this.empruntEnCours;
    }
-   
+   public void setEmpruntEnCours(ArrayList<EmpruntEnCours> empruntEnCours) {
+						
+						this.empruntEnCours = empruntEnCours;
+					}
    /**
     * @return Integer
     * @roseuid 49423A15037A
     */
-   public Integer getNbEmpruntsEnCours() 
+   public int getNbEmpruntsEnCours() 
    {
-    return null;
+    return this.empruntEnCours.size();
    }
 }
