@@ -2,6 +2,7 @@
 
 package metier;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -58,7 +59,7 @@ public class Adherent extends Utilisateur {
 	 */
 	public int getNbRetards() {
 		int n=0;
-		EmpruntEnCours[] tableauEmprunt = this.getEmpruntEnCours();
+		ArrayList<EmpruntEnCours> tableauEmprunt = this.getEmpruntEnCours();
 		for(int i=0;i<this.getNbEmpruntsEnCours();i++){
 			dgc.add(Calendar.DAY_OF_YEAR,-dureeMaxPrets);
 			Date minSansRetard = dgc.getTime();
