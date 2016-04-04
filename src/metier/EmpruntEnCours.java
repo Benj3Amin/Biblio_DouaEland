@@ -14,8 +14,8 @@ public class EmpruntEnCours {
 	 * @param ex
 	 * @roseuid 4CE01EEB035B
 	 */
-	public EmpruntEnCours(Exemplaire ex) {
-		this(ex, new Date());
+	public EmpruntEnCours(Utilisateur user, Exemplaire ex) {
+		this(user, ex, new Date());
 	}
 
 	/**
@@ -23,7 +23,8 @@ public class EmpruntEnCours {
 	 * @param d
 	 * @roseuid 4CE0090902CE
 	 */
-	public EmpruntEnCours(Exemplaire ex, Date d) {
+	public EmpruntEnCours(Utilisateur user, Exemplaire ex, Date d) {
+		this.setEmprunteur(user);
 		this.setExemplaire(ex);
 		this.setDateEmprunt(d);
 	}
@@ -61,6 +62,12 @@ public class EmpruntEnCours {
 	 */
 	public void setDateEmprunt(Date d) {
 		this.dateEmprunt = d;
+	}
+
+	@Override
+	public String toString() {
+		return "Date de l'emprunt : " + dateEmprunt + "\nExemplaire : "
+				+ exemplaire + "\nEmprunteur : " + emprunteur+"\n";
 	}
 	
 }

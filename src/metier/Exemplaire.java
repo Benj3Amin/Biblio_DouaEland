@@ -67,4 +67,10 @@ public class Exemplaire {
 		this.theEmpruntEnCours = theEmpruntEnCours;
 	}
 
+	@Override
+	public String toString() {
+		return "[idExemplaire : " + idExemplaire + ", isbn : " + isbn
+				+ "]";
+	}
+
 }
