@@ -1,8 +1,10 @@
 package test;
 
 import java.util.Date;
+
 import metier.Adherent;
 import metier.BiblioException;
+import metier.Employe;
 import metier.EmpruntEnCours;
 import metier.Exemplaire;
 import metier.ExemplairesDAO;
@@ -46,8 +48,14 @@ public class TestRetour {
 		System.out.println("Collection de l'utilisateur :\n"+ad1.getEmpruntEnCours());
 		System.out.println("Archive de l'utilisateur :\n"+ad1.getEmpruntArchives());
 		
+		System.out.println();
+		System.out.println();
 
 		
-		
+		for(int i=0;i<100000;i++){
+			new Employe();
+		}
+
+		System.gc();
 	}
 }

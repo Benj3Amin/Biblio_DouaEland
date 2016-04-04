@@ -34,7 +34,10 @@ public class EmpruntEnCours {
 	}
 
 	public void setExemplaire(Exemplaire exemplaire) {
-		if(exemplaire.getStatus()==EnumStatusExemplaire.DISPONIBLE){
+		if(exemplaire==null){
+			this.exemplaire = null;
+		}
+		else if(exemplaire.getStatus()==EnumStatusExemplaire.DISPONIBLE){
 			this.exemplaire = exemplaire;
 			exemplaire.setTheEmpruntEnCours(this);
 		}
@@ -68,6 +71,14 @@ public class EmpruntEnCours {
 	public String toString() {
 		return "Date de l'emprunt : " + dateEmprunt + "\nExemplaire : "
 				+ exemplaire + "\nEmprunteur : " + emprunteur+"\n";
+	}
+	
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
+		System.out.println("Je suis Collecté");
 	}
 	
 }

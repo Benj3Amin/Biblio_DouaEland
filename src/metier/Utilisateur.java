@@ -59,9 +59,11 @@ public class Utilisateur extends Personne {
 	public void retour(EmpruntEnCours ep) throws BiblioException {
 		this.empruntArchives.add(new EmpruntArchive(ep.getEmprunteur(), ep.getExemplaire(), ep.getDateEmprunt(), new Date()));
 		ep.getExemplaire().setTheEmpruntEnCours(null);
-		ep.getExemplaire().setStatus(EnumStatusExemplaire.DISPONIBLE);
 		this.empruntEnCours.remove(ep);
-		
+		ep.getExemplaire().setStatus(EnumStatusExemplaire.DISPONIBLE);
+		ep.setEmprunteur(null);
+		ep.setExemplaire(null);
+		ep.setDateEmprunt(null);
 	}
 
 	/**
