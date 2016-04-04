@@ -4,8 +4,9 @@ package metier;
 
 import java.util.Date;
 
-public class EmpruntEnCours {
+public class EmpruntArchive {
 	private Date dateEmprunt;
+	private Date dateRestitutionEff;
 	private Exemplaire exemplaire;
 	private Utilisateur emprunteur;
 
@@ -14,8 +15,8 @@ public class EmpruntEnCours {
 	 * @param ex
 	 * @roseuid 4CE01EEB035B
 	 */
-	public EmpruntEnCours(Utilisateur user, Exemplaire ex) {
-		this(user, ex, new Date());
+	public EmpruntArchive(Utilisateur user, Exemplaire ex) {
+		this(user, ex, new Date(), new Date());
 	}
 
 	/**
@@ -23,10 +24,11 @@ public class EmpruntEnCours {
 	 * @param d
 	 * @roseuid 4CE0090902CE
 	 */
-	public EmpruntEnCours(Utilisateur user, Exemplaire ex, Date d) {
+	public EmpruntArchive(Utilisateur user, Exemplaire ex, Date d, Date r) {
 		this.setEmprunteur(user);
 		this.setExemplaire(ex);
 		this.setDateEmprunt(d);
+		this.setDateRestitutionEff(r);
 	}
 
 	public Exemplaire getExemplaire() {
@@ -34,17 +36,15 @@ public class EmpruntEnCours {
 	}
 
 	public void setExemplaire(Exemplaire exemplaire) {
-		if(exemplaire==null){
-			this.exemplaire = null;
-		}
-		else if(exemplaire.getStatus()==EnumStatusExemplaire.DISPONIBLE){
-			this.exemplaire = exemplaire;
-			exemplaire.setTheEmpruntEnCours(this);
-		}
-		else if(exemplaire.getTheEmpruntEnCours()==null){
-			this.exemplaire = null;
-			System.err.println("Le livre n'est pas disponible!");
-		}
+		this.exemplaire = exemplaire;
+	}
+
+	public Date getDateRestitutionEff() {
+		return dateRestitutionEff;
+	}
+
+	public void setDateRestitutionEff(Date dateRestitutionEff) {
+		this.dateRestitutionEff = dateRestitutionEff;
 	}
 
 	public Utilisateur getEmprunteur() {
@@ -69,16 +69,12 @@ public class EmpruntEnCours {
 
 	@Override
 	public String toString() {
-		return "Date de l'emprunt : " + dateEmprunt + "\nExemplaire : "
-				+ exemplaire + "\nEmprunteur : " + emprunteur+"\n";
+		return "Archive [dateEmprunt : " + dateEmprunt
+				+ "\nDate de Restitution Effective : " + dateRestitutionEff
+				+ "\nExemplaire=" + exemplaire + "\nEmprunteur=" + emprunteur
+				+ "]";
 	}
-	
 
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-		System.out.println("Je suis Collecté");
-	}
+
 	
 }
