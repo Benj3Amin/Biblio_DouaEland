@@ -1,7 +1,6 @@
 //Source file: D:\\Rose\\biblio\\metier\\Exemplaire.java
 
 package metier;
-
 import java.util.Date;
 
 public class Exemplaire {
