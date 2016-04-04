@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Utilisateur extends Personne 
 {
    private int idUtilisateur;
+   private static int idxUtilisateur=8001;
    private String pwd;
    private String pseudonyme;
    private ArrayList <EmpruntEnCours> empruntEnCours =new ArrayList<EmpruntEnCours>();
@@ -15,7 +16,9 @@ public class Utilisateur extends Personne
    /**
     * @roseuid 5241490A01F4
     */
-		   public Utilisateur() { }
+		   public Utilisateur() { 
+			   this(idxUtilisateur++,"","");
+		   }
 		  
 		   public Utilisateur(Integer idUtilisateur, String pwd, String pseudonyme) {
 			
@@ -56,9 +59,10 @@ public class Utilisateur extends Personne
 
 /**
     * @param ep
+ * @throws BiblioException 
     * @roseuid 4CA4A34E02FD
     */
-   public void addEmpruntEnCours(EmpruntEnCours ep) 
+   public void addEmpruntEnCours(EmpruntEnCours ep) throws BiblioException 
    {
 	   this.empruntEnCours.add(ep);
 	   ep.getExemplaire().setStatus(EnumStatusExemplaire.PRETE);
@@ -73,6 +77,7 @@ public class Utilisateur extends Personne
    {
     return this.empruntEnCours;
    }
+   
    public void setEmpruntEnCours(ArrayList<EmpruntEnCours> empruntEnCours) {
 						
 						this.empruntEnCours = empruntEnCours;
@@ -85,4 +90,11 @@ public class Utilisateur extends Personne
    {
     return this.empruntEnCours.size();
    }
+
+@Override
+public String toString() {
+	return "idUtilisateur : " + idUtilisateur;
+}
+   
+   
 }

@@ -2,10 +2,10 @@
 
 package metier;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 public class Adherent extends Utilisateur {
 	private String telephone;
@@ -42,15 +42,30 @@ public class Adherent extends Utilisateur {
 		return dureeMaxPrets;
 	}
 
+	 public void addEmpruntEnCours(EmpruntEnCours ep) throws BiblioException 
+	   {
+		 if(this.isConditionsPretAcceptees()){
+			 super.addEmpruntEnCours(ep);
+		 }
+	   }
+	
+		
 	/**
 	 * @return Boolean
+	 * @throws BiblioException 
 	 * @roseuid 4942399B00EA
 	 */
-	public Boolean isConditionsPretAcceptees() {
-		if(this.getNbEmpruntsEnCours()<nbMaxPrets && this.getNbRetards()==0){
+	public Boolean isConditionsPretAcceptees() throws BiblioException {
+		if(this.getNbEmpruntsEnCours()>=nbMaxPrets){
+			throw new BiblioException("L'utilisateur a trop d'emprunts!");
+		}
+		else if(this.getNbRetards()>0){
+			throw new BiblioException("L'utilisateur a "+this.getNbRetards()+" retard(s)!");
+		}
+		else {
 			return true;
 		}
-		return false;
+		//return false;
 	}
 
 	/**
@@ -59,14 +74,19 @@ public class Adherent extends Utilisateur {
 	 */
 	public int getNbRetards() {
 		int n=0;
-		ArrayList<EmpruntEnCours> tableauEmprunt = this.getEmpruntEnCours();
-		for(int i=0;i<this.getNbEmpruntsEnCours();i++){
+		if(this.getEmpruntEnCours().size()==0){
+			return n;
+		}
+		else{
+		Iterator<EmpruntEnCours> itr=this.getEmpruntEnCours().iterator();
+		while(itr.hasNext()){
 			dgc.add(Calendar.DAY_OF_YEAR,-dureeMaxPrets);
 			Date minSansRetard = dgc.getTime();
 			dgc.add(Calendar.DAY_OF_YEAR,dureeMaxPrets);
-			if(minSansRetard.after(tableauEmprunt[i].getDateEmprunt())){
+			if(minSansRetard.after(itr.next().getDateEmprunt())){
 				n+=1;
 			}
+		}
 		}
 		return n;
 	}

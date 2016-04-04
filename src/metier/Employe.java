@@ -13,7 +13,9 @@ public class Employe extends Utilisateur
     */
    
 		   //constructeurs
-		   public Employe() {}
+		   public Employe() {
+			   this("",EnumCategorieEmploye.BIBLIOTHECAIRE);
+		   }
 		
 		   public Employe(String codeMatricule, EnumCategorieEmploye categorieEmploye) {
 			super();
@@ -30,6 +32,12 @@ public class Employe extends Utilisateur
 
 		public EnumCategorieEmploye getCategorieEmploye() {
 			return categorieEmploye;
+		}
+
+		@Override
+		public String toString() {
+			return super.toString()+"\nCode de Matricule : " + codeMatricule
+					+ "\nCategoriede l'employé :" + categorieEmploye;
 		}
 
 		
